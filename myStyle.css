@@ -1,0 +1,1967 @@
+﻿/* טעינת הפונט Heebo מגוגל פונטס */
+@import url('https://fonts.googleapis.com/css2?family=Heebo:wght@300..900&display=swap');
+
+/* ============ משתנים גלובליים ============ */
+:root{
+    /* צבעי בסיס */
+    --primary: #4b2b1d; /* צבע עיקרי - חום כהה לטקסטים */
+    --secondary: #a9745b; /* צבע משני - חום בהיר */
+    --accent: #a37955; /* צבע הדגשה - חום */
+
+    /* רקעים */
+    --background: #fffdf9; /* רקע עמוד ראשי - קרם בהיר */
+    --card-bg: #f3e0d2; /* רקע כרטיסים - בז' */
+    --white: #ffffff; 
+
+    /* צבעים נוספים */
+    --muted: #745c49; /* צבע מעומעם לטקסט משני */
+    --border: #c9a989; /* צבע גבולות */
+
+    /*עיגול פינות רדיוסים*/
+    --radius-xl: 28px;
+    --radius-lg: 20px;
+    --radius-md: 14px;
+
+    /* צלליות */
+    --shadow: 0 6px 20px rgba(75,43,29,.08);
+    --shadow-lg: 0 10px 30px rgba(90,60,40,.08);
+}
+
+/* ============ BASE ============ */
+*{ box-sizing: border-box; } /* קובע שכל האלמנטים יכללו padding ו-border בחישוב הרוחב */
+html{ scroll-behavior: smooth; } /* גלילה חלקה באתר */
+
+/* הגדרות גוף העמוד */
+body{
+    direction:rtl;                      /* כיוון כתיבה מימין לשמאל */
+    margin:0;                           /* מבטל שוליים ברירת מחדל */
+    font-family:"Heebo",sans-serif;     /* פונט ראשי */
+    background: var(--bg);              /* צבע רקע מהמשתנה */
+    color: var(--primary);              /* צבע טקסט ברירת מחדל */
+    line-height:1.6;                    /* רווח בין שורות */
+}
+
+
+/* תמונות - מגיבות ומעוגלות */
+img{
+    max-width:100%;              /* לא תעבור רוחב של ההורה */
+    height:auto;                 /* שמירה על פרופורציות */
+    border-radius: var(--radius); /* פינות מעוגלות */
+}
+
+
+/* קישורים */
+a{
+    color:var(--secondary);      /* צבע קישור */
+    text-decoration:none;        /* ללא קו תחתון */
+}
+a:hover{
+    text-decoration:underline;   /* קו תחתון בריחוף עכבר */
+}
+
+/* כותרות */
+h1,h2,h3,h4{
+    margin-top:0;                /* מבטל מרווח עליון */
+    color:var(--primary);        /* צבע כותרות */
+}
+
+
+/* מיכל ראשי - מרכז את התוכן */
+.container{
+    width:min(1200px,92%);       /* רוחב מקסימלי 1200px או 92% מהמסך */
+    margin-inline:auto;          /* ממרכז את האלמנט */
+}
+
+
+.muted{ color: var(--muted); }   /* טקסט מעומעם */
+
+/* ============ HEADER - כותרת האתר ============ */
+/* כותרת נצמדת לחלק העליון */
+.site-header.fancy{
+    position:sticky;                  /* נשאר במקום בגלילה */
+    top:0;                            /* נצמד לחלק העליון */
+    z-index:1000;                     /* מעל כל האלמנטים האחרים */
+    padding:12px 16px;
+    background: linear-gradient(180deg,#edd9cd 0%, rgba(237,217,205,.9) 100%); /* גרדיאנט רקע */
+    border-bottom: 1px solid rgba(163,121,85,.25);  /* גבול תחתון עדין */
+    backdrop-filter: blur(6px);       /* טשטוש רקע מאחורי הכותרת */
+}
+
+
+/* כרטיס הניווט בתוך הכותרת */
+.nav-card{
+    display:grid;                              /* פריסת grid */
+    grid-template-columns: 200px 1fr 260px;    /* 3 עמודות: לוגו, תפריט, חיפוש */
+    align-items:center;                        /* יישור אמצעי אנכי */
+    gap:16px;                                  /* מרווח בין עמודות */
+    background:var(--card-bg);
+    border:1px solid rgba(163,121,85,0.25);
+    border-radius:28px;                        /* עיגול חזק */
+    padding:14px 20px;
+    box-shadow:var(--shadow);
+    backdrop-filter:blur(2px);                 /* טשטוש קל */
+    overflow: visible;                         /* מאפשר לתפריט נפתח לצאת החוצה */
+}
+
+/* לוגו ושם האתר */
+.brand{
+    display:flex;
+    gap:8px;
+    align-items:center;
+    text-decoration:none;
+    color:var(--primary);
+}
+.brand .site-logo{
+    height:70px;              /* גובה הלוגו */
+    width:auto;
+    display:block;
+    max-width: 80px;
+}
+.brand-mark{font-size:22px}   /* גודל טקסט הלוגו */
+
+/* תפריט ניווט ראשי */
+.main-nav ul{
+    display:flex;                           /* פריסה אופקית */
+    justify-content:center;                 /* יישור למרכז */
+    align-items:center;
+    gap:clamp(12px,3vw,28px);              /* מרווח דינמי בין פריטים */
+    list-style:none;                        /* ללא נקודות */
+    margin:0;
+    padding:0;
+    font-size:1.05rem;
+}
+
+/* קישורי תפריט */
+.main-nav a{
+    color:var(--primary);
+    text-decoration:none;
+    padding:8px 14px;                       /* ריפוד פנימי */
+    border-radius:9999px;                   /* עיגול מלא - כדור */
+}
+.main-nav a:hover{
+    background:#f7e8da;                     /* רקע בהיר בריחוף */
+}
+/* ===============================
+   DROPDOWN MENU – תפריט נפתח למתכונים
+================================== */
+
+/* קונטיינר התפריט */
+.main-nav li.dropdown {
+    position: relative;
+}
+
+/* תוכן התפריט הנפתח */
+.main-nav .dropdown-content {
+    display: none;
+    position: absolute;
+    right: 0; /* מותאם לעברית */
+    top: 100%;
+    background: var(--card-bg, #f3e0d2);
+    border: 1px solid rgba(163, 121, 85, 0.25);
+    border-radius: var(--radius, 20px);
+    box-shadow: var(--shadow, 0 6px 20px rgba(0, 0, 0, 0.06));
+    padding: 6px 0;
+    z-index: 1000;
+    min-width: 180px;
+}
+
+/* הצגה בעת מעבר עם העכבר */
+.main-nav li.dropdown:hover .dropdown-content {
+    display: block;
+}
+
+/* קישורים בתוך התפריט */
+.main-nav .dropdown-content a {
+    display: block;
+    padding: 10px 16px;
+    color: var(--primary, #4b2b1d);
+    text-decoration: none;
+    transition: background-color 0.2s ease, color 0.2s ease;
+}
+
+/* ריחוף על קישור בתפריט */
+.main-nav .dropdown-content a:hover {
+    background: #f7e8da;
+    color: var(--accent, #a37955);
+    text-decoration: none;
+}
+
+/* החץ הקטן ליד "מתכונים" */
+.main-nav li.dropdown > a::after {
+    content: " ▾";
+    font-size: 0.8em;
+    color: var(--secondary, #a9745b);
+}
+
+/* --- Dropdown יציב ונעלם כשעוזבים --- */
+.main-nav li.dropdown{
+    position: relative;
+}
+
+/* מצב סגור – לא נראה, לא לוכד עכבר */
+.main-nav .dropdown-content{
+    position: absolute;
+    inset-inline-end: 0;      /* ימין ב-RTL */
+    top: 100%;
+    min-width: 180px;
+    background: var(--card-bg, #f3e0d2);
+    border: 1px solid rgba(163,121,85,.25);
+    border-radius: var(--radius, 20px);
+    box-shadow: var(--shadow, 0 6px 20px rgba(0,0,0,.06));
+    padding: 6px 0;
+    z-index: 1000;
+
+    opacity: 0;
+    visibility: hidden;
+    transform: translateY(6px);
+    pointer-events: none;       /* חשוב! לא לוכד עכבר כשהוא סגור */
+    transition: opacity .18s ease, transform .18s ease, visibility .18s ease;
+}
+
+/* מצב פתוח – בהובר על כל ה־li או כשיש פוקוס פנימי (מקלדת) */
+.main-nav li.dropdown:hover .dropdown-content,
+.main-nav li.dropdown:focus-within .dropdown-content{
+    opacity: 1;
+    visibility: visible;
+    transform: translateY(0);
+    pointer-events: auto;       /* עכשיו כן לוכד עכבר */
+}
+
+/* קישורים בתוך הסאב־תפריט */
+.main-nav .dropdown-content a{
+    display:block;
+    padding:10px 16px;
+    color:var(--primary, #4b2b1d);
+    text-decoration:none;
+}
+.main-nav .dropdown-content a:hover{
+    background:#f7e8da;
+    color:var(--accent, #a37955);
+}
+
+/* החץ הקטן ליד "מתכונים" */
+.main-nav li.dropdown > a::after{
+    content:" ▾";
+    font-size:.8em;
+    color:var(--secondary, #a9745b);
+}
+
+/* לוודא שהתפריט לא נחתך ע"י המכלול */
+.nav-card{ overflow: visible; }
+
+    
+}
+
+/* כשמרחפים על הפריט או בפוקוס - הצג את התפריט */
+.main-nav li.dropdown:hover .dropdown-content,
+.main-nav li.dropdown:focus-within .dropdown-content{
+    opacity: 1;                             /* מופיע */
+    visibility: visible;                    /* נראה */
+    transform: translateY(0);               /* במיקום המקורי */
+    pointer-events: auto;                   /* מגיב לעכבר */
+}
+
+/* קישורים בתפריט הנפתח */
+.main-nav .dropdown-content a{
+    display:block;
+    padding:10px 16px;
+    color:var(--primary);
+    text-decoration:none;
+}
+.main-nav .dropdown-content a:hover{
+    background:#f7e8da;                     /* רקע בהיר בריחוף */
+    color:var(--accent);                    /* שינוי צבע */
+}
+
+/* חץ קטן ליד פריטים עם תפריט נפתח */
+.main-nav li.dropdown > a::after{
+    content:" ▾";                           /* סמל חץ למטה */
+    font-size:.8em;
+    color:var(--secondary);
+}
+
+/* שדה חיפוש */
+.search{
+    display:flex;
+    align-items:center;
+    gap:10px;
+    background:#fff;                        /* רקע לבן */
+    border:1px solid #e3cfc0;
+    border-radius:9999px;                   /* עיגול מלא */
+    padding:8px 16px;
+    box-shadow: inset 0 2px 4px rgba(0,0,0,0.04);  /* צל פנימי */
+    max-width:420px;
+}
+
+/* שדה הקלט */
+.search input{
+    border:none;
+    outline:none;                           /* ללא מסגרת בפוקוס */
+    background:transparent;
+    width:180px;
+    font-size:0.95rem;
+    color:var(--primary);
+}
+
+/* כפתור החיפוש */
+.search button, .search .icon{
+    border:none;
+    background:transparent;
+    color:var(--secondary);
+    cursor:pointer;                         /* סמן יד */
+    font-size:1.1rem;
+    line-height:1;
+    padding:4px 6px;
+    border-radius:9999px;
+}
+.search button:hover, .search .icon:hover{
+    color:var(--accent);                    /* שינוי צבע בריחוף */
+}
+
+/* כותרת כשגוללים למטה - קטנה יותר */
+.site-header.fancy.is-scrolled .nav-card{
+    padding:10px 16px;                      /* פחות ריפוד */
+}
+.site-header.fancy.is-scrolled .site-logo{
+    height:58px;                            /* לוגו קטן יותר */
+}
+
+
+/* ============ BUTTONS - כפתורים ============ */
+.btn{
+    display:inline-block;
+    padding:10px 16px;
+    border-radius:14px;
+    cursor:pointer;
+    transition:.2s ease;                    /* אנימציה חלקה */
+    border:1px solid var(--border);
+    background:var(--white);
+    color:var(--primary);
+    text-decoration:none;
+    font-weight:600;
+}
+/* אפקט ריחוף - הכפתור זז מעט למעלה */
+.btn:hover{
+    transform:translateY(-1px);             /* הזזה למעלה */
+    box-shadow: var(--shadow);              /* הוספת צל */
+}
+/* כפתור ראשי - צבעוני */
+.btn.primary, .btn-primary{
+    background:var(--accent);
+    color:#fff;
+    border-color:var(--accent);
+}
+.btn.primary:hover, .btn-primary:hover{
+    transform:translateY(-2px);             /* הזזה גדולה יותר */
+    box-shadow: var(--shadow);
+}
+/* כפתור ghost - רקע לבן */
+.btn.ghost{
+    background:var(--white);
+}
+/* כפתור משני */
+.btn.accent, .btn-secondary{
+    background:var(--secondary);
+    color:#fff;
+    border-color:var(--secondary);
+}
+/* כפתור ברוחב מלא */
+.btn.block{
+    width:100%;
+}
+
+/* ============ FOOTER - תחתית האתר ============ */
+.site-footer{
+    background: linear-gradient(180deg,#edd9cd 0%, #e8d3c3 100%);  /* גרדיאנט */
+    border-top: 1px solid rgba(163,121,85,.25);
+    padding: 28px 0 26px;
+    margin-top: 48px;                       /* מרווח מהתוכן */
+    color: var(--muted);
+}
+
+/* פריסת תוכן הפוטר */
+.site-footer .footer-inner{
+    width: min(1200px, 92%);
+    margin: 0 auto;
+    display: grid;
+    grid-template-columns: 1fr auto 1fr;    /* 3 עמודות */
+    /* שמות אזורים לפריסה */
+    grid-template-areas:
+    "social nav brand"                      /* שורה ראשונה */
+    "copy   copy copy";                     /* שורה שנייה - זכויות יוצרים */
+    align-items: center;
+    gap: 12px 24px;
+}
+
+/* מיקום הלוגו */
+.site-footer .footer-brand{
+    grid-area: brand;                       /* מיקום לפי שם האזור */
+    justify-self: end;                      /* יישור לקצה */
+}
+.site-footer .footer-brand img{
+    height: 56px;
+    width: auto;
+    display: block;
+}
+
+/* תפריט פוטר */
+.site-footer .footer-nav{
+    grid-area: nav;
+    display:flex;
+    gap:28px;
+    flex-wrap:wrap;
+    justify-content:center;
+    align-items:center;
+}
+.site-footer .footer-nav a{
+    color: var(--primary);
+    text-decoration:none;
+    font-weight:600;
+    transition: color .2s ease;             /* אנימציית צבע */
+}
+.site-footer .footer-nav a:hover{
+    color: var(--accent);                   /* צבע הדגשה בריחוף */
+}
+
+/* ============ אייקוני רשתות חברתיות ============ */
+.site-footer .social{
+    grid-area: social;
+    list-style:none;
+    margin:0;
+    padding:0;
+    display:flex;
+    gap:22px;
+    justify-content:flex-start;
+    align-items:center;
+}
+
+/* עיצוב עיגולי לאייקון */
+.site-footer .social .ico{
+    display:inline-flex;
+    width:56px;
+    height:56px;
+    border-radius:50%;                      /* עיגול מלא */
+    background:#fff;
+    border:1px solid rgba(163,121,85,.25);
+    box-shadow:0 6px 20px rgba(0,0,0,.06);
+    align-items:center;
+    justify-content:center;
+    text-decoration:none;
+    transition: transform .2s ease, box-shadow .2s ease;
+}
+
+/* אפקט ריחוף - האייקון זז למעלה */
+.site-footer .social .ico:hover{
+    transform:translateY(-2px);
+    box-shadow:0 10px 26px rgba(0,0,0,.12);
+}
+
+/* האייקון עצמו - משתמשים ב-SVG מוטמע */
+.site-footer .social .ico::before{
+    content:"";
+    display:block;
+    width:22px;
+    height:22px;
+    background:no-repeat center/contain;
+}
+
+/* אייקונים ספציפיים - SVG מוטמע כ-data URL */
+.site-footer .social .ico.youtube::before{
+    background-image:url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><polygon points="9,7 18,12 9,17" fill="%23a9745b"/></svg>');
+}
+.site-footer .social .ico.facebook::before{
+    background-image:url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path fill="%23a9745b" d="M14 2h4v4h-2c-1.1 0-2 .9-2 2v2h4l-1 4h-3v8h-4v-8H7v-4h3V9c0-3 2-7 4-7z"/></svg>');
+}
+.site-footer .social .ico.instagram::before{
+    background-image:url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><rect x="3" y="3" width="18" height="18" rx="5" ry="5" fill="none" stroke="%23a9745b" stroke-width="2"/><circle cx="12" cy="12" r="4" fill="none" stroke="%23a9745b" stroke-width="2"/><circle cx="17" cy="7" r="1.2" fill="%23a9745b"/></svg>');
+}
+
+/* טקסט זכויות יוצרים */
+.site-footer .copyright{
+    grid-area: copy;
+    margin: 8px 0 0;
+    text-align:center;
+    font-size:.95rem;
+    color: var(--muted);
+}
+
+/* ============ מסכים קטנים לפוטר ============ */
+@media (max-width: 780px){
+    .site-footer .footer-inner{
+        grid-template-columns: 1fr;         /* עמודה אחת */
+        /* סדר חדש מלמעלה למטה */
+        grid-template-areas: "brand" "nav" "social" "copy";
+        gap: 14px;
+    }
+    .site-footer .footer-brand{ justify-self:center; }
+    .site-footer .social{ justify-content:center; }
+    .site-footer .footer-nav{ gap:16px; }
+    .site-footer .footer-brand img{ height:52px; }
+    .site-footer .social .ico{ width:50px; height:50px; }
+}
+@media (max-width: 600px) {
+    .brand .site-logo { max-width: 110px; }
+}
+
+/* ============================================================
+   דף הבית 
+============================================================ */
+.page-home{
+    background: var(--background);
+    color: var(--primary);
+}
+
+.page-home .hero{
+    width: min(1200px, 92%);
+    margin: 28px auto;
+    padding: 36px 28px;
+    display: grid;
+    grid-template-columns: 1.2fr 1fr; /* טקסט רחב יותר, תמונה קטנה */
+    gap: 28px;
+    align-items: center;
+    background: linear-gradient(160deg, #fff7f0 0%, #fff3ea 100%);
+    border: 1px solid #e7d8cf;
+    border-radius: var(--radius-xl);
+    box-shadow: var(--shadow-lg);
+}
+
+/* תוכן טקסט באזור ההירו */
+.page-home .hero-inner h1{
+    margin: 0 0 8px;
+    font-size: clamp(32px, 5.2vw, 62px);  /* גודל דינמי בין 32px ל-62px */
+    font-weight: 800;
+}
+.page-home .hero-inner p{
+    margin: 0 0 16px;
+    color: var(--muted);
+    font-size: clamp(16px, 1.4vw, 20px);
+}
+
+.page-home .quick{
+    display: flex;
+    flex-wrap: wrap;
+    gap: 10px;
+}
+
+.page-home .pill{
+    display: inline-block;
+    padding: 10px 16px;
+    border-radius: 9999px;
+    background: var(--white);
+    border: 1px solid #e7d8cf;
+    color: var(--primary);
+    text-decoration: none;
+    transition: .15s;
+}
+.page-home .pill:hover{ background: #F5E9DF; }
+.page-home .pill.accent{
+    background: var(--accent);
+    color: #fff;
+    border-color: var(--accent);
+}
+
+.page-home .hero-art{
+    height: 200px;
+    border-radius: 18px;
+    background: linear-gradient(135deg, #fffaf7, #f5e9df);
+    border: 1px solid #e7d8cf;
+}
+
+.page-home .block{
+    width: min(1200px, 92%);
+    margin: 32px auto 0;
+}
+.page-home .block > h2{
+    margin: 0 0 14px;
+    font-size: clamp(22px, 3.2vw, 34px);
+    letter-spacing: -.01em;
+}
+.page-home .grid{
+    display: grid;
+    gap: 22px;
+}
+
+.page-home .teasers{
+    grid-template-columns: repeat(auto-fit, minmax(340px, 1fr));
+    perspective: 1000px;
+    align-items: stretch;
+}
+
+.page-home .card{
+    background: var(--white);
+    border: 1px solid #e7d8cf;
+    border-radius: var(--radius-lg);
+    box-shadow: var(--shadow-lg);
+}
+
+.page-home .teaser{
+    display: flex;
+    gap: 16px;
+    padding: 16px;
+    font-size: 0.9rem;
+    line-height: 1.5;
+    transition: transform 0.25s ease, box-shadow 0.25s ease, border-color 0.25s ease;
+}
+
+.page-home .teaser:hover{
+    transform: scale(1.03);
+    box-shadow: 0 10px 30px rgba(166, 115, 74, 0.18);
+    border-color: var(--accent);
+}
+
+.page-home .teaser .shot{
+    flex: 0 0 180px;
+    height: 140px;
+    border-radius: 16px;
+    overflow: hidden;
+    border: 1px solid #e7d8cf;
+}
+.page-home .teaser .shot img{
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    display: block;
+}
+
+.page-home .teaser .body{
+    flex: 1 1 auto;
+    min-width: 0;
+}
+.page-home .teaser h3{
+    margin: .2rem 0 6px;
+    font-size: 1.05rem;
+    color: var(--accent);
+}
+.page-home .teaser p{
+    margin: 0;
+    color: var(--primary);
+    font-size: 0.9rem;
+}
+
+.page-home .cats{
+    grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+}
+.page-home .cat{
+    display: block;
+    text-decoration: none;
+    color: var(--primary);
+    padding: 18px;
+    position: relative;
+    overflow: hidden;
+}
+
+.page-home .cat::before{
+    content: "";
+    position: absolute;
+    inset-inline-start: 0;
+    top: 0;
+    bottom: 0;
+    width: 8px;
+    background: linear-gradient(#A6734A, #E7D8CF);
+}
+.page-home .cat h3{
+    margin: 0 0 6px;
+    font-size: 1.2rem;
+    color: var(--accent);
+}
+.page-home .cat p{
+    margin: 0;
+    color: var(--muted);
+}
+
+.page-home .mini-tips{
+    grid-template-columns: repeat(auto-fit, minmax(340px, 1fr));
+    gap: 16px;
+}
+.page-home .mini-tip{
+    display: grid;
+    grid-template-columns: 1fr 140px;
+    gap: 12px;
+    padding: 12px;
+}
+.page-home .mini-tip .shot{
+    height: 110px;
+    border-radius: 14px;
+    overflow: hidden;
+    border: 1px solid #e7d8cf;
+    background: #F5E9DF;
+}
+
+.page-home .mini-tip .shot img{
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    display: block;
+}
+
+.page-home .mini-tip .txt h3{
+    margin: .2rem 0 .3rem;
+    font-size: 1.1rem;
+    color: var(--accent);
+}
+.page-home .mini-tip .txt p{
+    margin: 0;
+    color: var(--muted);
+}
+
+.page-home .cta-center{ margin-top: 8px; }
+
+.page-home .tips-alt{ margin-top: 24px; }
+.page-home .tips-alt > h2{ margin-bottom: 10px; }
+
+.page-home .tips-alt-grid{
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+    gap: 16px;
+}
+
+.page-home .tip-alt{
+    display: flex;
+    align-items: center;
+    gap: 14px;
+    padding: 12px 14px;
+    border-radius: 16px;
+    background: var(--white);
+    border: 1px solid #e7d8cf;
+    box-shadow: var(--shadow-lg);
+}
+
+.page-home .tip-thumb{
+    flex: 0 0 88px;
+    height: 88px;
+    border-radius: 14px;
+    overflow: hidden;
+    border: 1px solid #e7d8cf;
+    background: #F5E9DF;
+}
+.page-home .tip-thumb img{
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    display: block;
+}
+
+.page-home .tip-copy{
+    flex: 1 1 auto;
+    min-width: 0;
+}
+.page-home .tip-copy h3{
+    margin: 0 0 4px;
+    font-size: 1.1rem;
+    color: var(--accent);
+}
+.page-home .tip-copy p{
+    margin: 0;
+    color: var(--muted);
+    line-height: 1.5;
+}
+
+.page-home .chips-xs{ margin-top: 6px; }
+.page-home .chip-xs{
+    display: inline-block;
+    padding: 4px 8px;
+    border-radius: 9999px;
+    border: 1px solid #e7d8cf;
+    background: #fff;
+    color: var(--accent);
+    font-size: .85rem;
+}
+
+.page-home .shortcuts{
+    width: min(1200px, 92%);
+    margin: 28px auto 48px;
+    text-align: center;
+}
+.page-home .shortcuts-grid{
+    grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+    gap: 16px;
+}
+
+.page-home .shortcut{
+    display: flex;
+    gap: 12px;
+    align-items: center;
+    text-decoration: none;
+    color: var(--primary);
+    padding: 8px;
+    border-radius: 16px;
+    background: var(--white);
+    border: 1px solid #e7d8cf;
+    box-shadow: var(--shadow-lg);
+    transition: .15s;
+}
+
+.page-home .shortcut:hover{
+    transform: translateY(-2px);
+    box-shadow: 0 12px 26px rgba(90,60,40,.12);
+}
+
+.page-home .shortcut .thumb{
+    flex: 0 0 72px;
+    height: 72px;
+    border-radius: 12px;
+    overflow: hidden;
+    border: 1px solid #e7d8cf;
+    background: #f7f2ee;
+}
+.page-home .shortcut .thumb img{
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    display: block;
+}
+
+.page-home .shortcut h3{
+    margin: 0 0 4px;
+    color: var(--accent);
+}
+
+.page-home .shortcut .meta{ color: var(--muted); }
+
+@media (max-width: 980px){
+    .page-home .hero{ grid-template-columns: 1fr; }
+    .page-home .hero-art{ height: 180px; }
+    .page-home .teaser .shot{
+        flex-basis: 160px;
+        height: 120px;
+    }
+    .page-home .mini-tip{ grid-template-columns: 1fr; }
+    .page-home .mini-tip .shot{
+        grid-column: auto;
+        order: -1;
+    }
+}
+
+@media (max-width: 560px){
+    .page-home .tip-thumb{
+        flex-basis: 76px;
+        height: 76px;
+    }
+    .page-home .tip-copy h3{ font-size: 1.05rem; }
+}
+
+/* ============================================================
+   דף מתכונים
+============================================================ */
+.page-recipes .breadcrumbs ol{
+    list-style: none;
+    display: flex;
+    gap: 6px;
+    padding: 12px 24px;
+    margin: 0;
+    font-size: .95rem;
+    color: var(--secondary);
+}
+.page-recipes .breadcrumbs li{
+    display: flex;
+    align-items: center;
+}
+
+.page-recipes .breadcrumbs li+li::before{
+    content: "›";
+    margin: 0 6px;
+    color: var(--accent);
+    font-weight: bold;
+}
+.page-recipes .breadcrumbs a{ color: var(--secondary); }
+.page-recipes .breadcrumbs a:hover{ text-decoration: underline; }
+
+.page-recipes .breadcrumbs [aria-current="page"]{
+    font-weight: 700;
+    color: var(--primary);
+}
+
+.page-recipes .recipe-header{
+    text-align: center;
+    padding: 40px 20px;
+    background: linear-gradient(180deg, #fffdf9 0%, #f9eee3 100%);
+    border-radius: 0 0 20px 20px;
+}
+
+.page-recipes .recipe-title{
+    font-size: clamp(2rem, 5vw, 2.8rem);
+    margin-bottom: 12px;
+    position: relative;
+    display: inline-block;
+}
+
+.page-recipes .recipe-title::after{
+    content: "";
+    display: block;
+    width: 60%;
+    height: 3px;
+    background: var(--accent);
+    margin: 10px auto 0;
+    border-radius: 2px;
+}
+
+.page-recipes .recipe-tags{
+    display: flex;
+    justify-content: center;
+    gap: 12px;
+    margin-top: 20px;
+    flex-wrap: wrap;
+}
+.page-recipes .tag{
+    background: var(--card-bg);
+    color: var(--primary);
+    padding: 6px 14px;
+    border-radius: 9999px;
+    font-size: .95rem;
+    box-shadow: 0 2px 6px rgba(0,0,0,0.05);
+}
+
+.page-recipes .recipe-hero{
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 30px;
+    padding: 24px 30px;
+    align-items: center;
+}
+.page-recipes .recipe-hero img{
+    display: block;
+    margin: 0 auto;
+    border-radius: var(--radius-lg);
+}
+
+.page-recipes .recipe-meta{
+    background: var(--card-bg);
+    padding: 20px;
+    border-radius: var(--radius-lg);
+    box-shadow: var(--shadow);
+}
+
+.page-recipes .meta-grid{
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 10px;
+    margin-bottom: 16px;
+}
+.page-recipes .meta-label{ font-weight: 700; }
+
+.page-recipes .recipe-actions{
+    display: flex;
+    gap: 10px;
+    margin-bottom: 12px;
+}
+
+.page-recipes .rating{ color: var(--accent); }
+
+.page-recipes .link-like{
+    background: none;
+    border: none;
+    color: var(--secondary);
+    cursor: pointer;
+}
+
+.page-recipes .recipe-layout{
+    display: grid;
+    grid-template-columns: 2fr 1fr;
+    gap: 30px;
+    padding: 20px 30px;
+}
+
+.page-recipes .card{
+    background: var(--card-bg);
+    border-radius: var(--radius-lg);
+    box-shadow: var(--shadow);
+    padding: 20px;
+    margin-bottom: 20px;
+    text-align: right;
+}
+.page-recipes .card.soft{ background: #fff7ef; }
+
+.page-recipes .section-header{
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.page-recipes .ingredients-list,
+.page-recipes .steps-list,
+.page-recipes .bullets{
+    padding-right: 20px;
+    margin: 0;
+}
+.page-recipes .ingredients-list li,
+.page-recipes .steps-list li,
+.page-recipes .bullets li{
+    margin-bottom: 10px;
+}
+
+.page-recipes .nutrition div{
+    display: flex;
+    justify-content: space-between;
+    padding: 4px 0;
+}
+
+.page-recipes .author-box{
+    display: flex;
+    gap: 10px;
+    align-items: center;
+}
+.page-recipes .author-box img{
+    width: 56px;
+    height: 56px;
+    border-radius: 50%;
+}
+
+.page-recipes .related{ padding: 40px 30px; }
+.page-recipes .related .cards{
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(220px, 1fr));
+    gap: 20px;
+    list-style: none;
+    margin: 0;
+    padding: 0;
+}
+
+.page-recipes .recipe-card{ text-align: center; }
+.page-recipes .recipe-card img{
+    width: 100%;
+    height: 130px;
+    object-fit: cover;
+    border-radius: var(--radius-lg) var(--radius-lg) 0 0;
+    display: block;
+}
+.page-recipes .recipe-card h3{
+    background: var(--card-bg);
+    margin: 0;
+    padding: 10px;
+    border-bottom-left-radius: var(--radius-lg);
+    border-bottom-right-radius: var(--radius-lg);
+}
+
+.page-recipes .comments{ padding: 40px 30px; }
+
+.page-recipes .comment-form{
+    display: grid;
+    gap: 15px;
+    margin-bottom: 30px;
+}
+
+    /* שדות טופס תגובות */
+.page-recipes .comment-form input,
+.page-recipes .comment-form textarea{
+    width: 100%;
+    padding: 8px;
+    border-radius: var(--radius-lg);
+    border: 1px solid #ccc;
+}
+
+/* רשימת תגובות */
+.page-recipes .comment-list{
+    list-style: none;
+    padding: 0;
+    margin: 0;
+}
+.page-recipes .comment{
+    background: var(--card-bg);
+    padding: 15px;
+    border-radius: var(--radius-lg);
+    margin-bottom: 15px;
+}
+.page-recipes .comment h4{
+    margin: 0;
+    font-size: 1rem;
+}
+
+/* מדיה קוורי - דף מתכונים */
+@media (max-width: 900px){
+    .page-recipes .recipe-hero{ grid-template-columns: 1fr; }
+    .page-recipes .recipe-layout{ grid-template-columns: 1fr; }
+}
+
+/* הדפסה - מסתיר אלמנטים מיותרים */
+@media print{
+    .site-header, .main-nav, .recipe-actions, .related, .comments, .site-footer{
+        display: none;
+    }
+    body{
+        font-size: 12pt;
+        color: #000;
+    }
+    .page-recipes .card{
+        box-shadow: none;
+        border: 1px solid #ccc;
+    }
+}
+
+/* ============================================================
+   דף טיפים
+============================================================ */
+.page-tips{ direction: rtl; }
+
+/* אזור הירו */
+.page-tips .page-hero{ padding: 36px 0 10px; }
+.page-tips .page-hero h1{
+    font-size: clamp(28px, 4vw, 56px);
+    margin: 0 0 12px;
+    font-weight: 800;
+    letter-spacing: -.02em;
+}
+
+/* תגיות סינון */
+.page-tips .chips{
+    display: flex;
+    flex-wrap: wrap;
+    gap: 10px;
+}
+.page-tips .chip{
+    border: 1px solid var(--border);
+    background: var(--white);
+    color: var(--accent);
+    padding: 8px 14px;
+    border-radius: 9999px;
+    cursor: pointer;
+    transition: .2s ease;
+}
+.page-tips .chip:hover{
+    transform: translateY(-1px);
+    box-shadow: var(--shadow);
+}
+
+/* תגית פעילה */
+.page-tips .chip.is-active{
+    background: var(--card-bg);
+    color: var(--primary);
+    border-color: var(--accent);
+}
+
+/* תגית קטנה */
+.page-tips .chip.sm{
+    padding: 6px 10px;
+    font-size: .95rem;
+}
+
+/* תוכן מודגש */
+.page-tips .feature{
+    display: grid;
+    gap: 28px;
+    grid-template-columns: 1.2fr 1fr;
+    background: var(--card-bg);
+    border: 1px solid var(--border);
+    border-radius: var(--radius-xl);
+    padding: 24px;
+    box-shadow: var(--shadow);
+}
+
+/* מדיה של תוכן מודגש */
+.page-tips .feature-media .img-skeleton{
+    height: 220px;
+    border-radius: var(--radius-lg);
+    background: linear-gradient(135deg, #fff 0%, #f1e4d7 60%);
+    border: 1px solid var(--border);
+    display: grid;
+    place-items: center;
+    color: var(--muted);
+    font-weight: 600;
+}
+.page-tips .feature-media img{
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    border-radius: var(--radius-lg);
+    display: block;
+    max-height: 300px;
+}
+
+/* תוכן הטקסט */
+.page-tips .feature-body h2{
+    margin: .25rem 0 .5rem;
+    font-size: clamp(20px, 2.4vw, 32px);
+}
+
+/* מטא-דאטה */
+.page-tips .meta{
+    display: flex;
+    flex-wrap: wrap;
+    gap: 8px;
+    list-style: none;
+    padding: 0;
+    margin: 14px 0 0;
+}
+.page-tips .meta li{
+    border: 1px solid var(--border);
+    border-radius: 9999px;
+    padding: 6px 12px;
+    background: var(--white);
+    color: var(--accent);
+    font-size: .95rem;
+    white-space: nowrap;
+}
+
+/* כפתורי פעולה */
+.page-tips .actions{
+    display: flex;
+    gap: 10px;
+    margin: 16px 0 6px;
+    justify-content: flex-start;
+}
+
+/* פריסה עם סיידבר */
+.page-tips .layout{
+    display: grid;
+    gap: 28px;
+    grid-template-columns: 320px 1fr;
+    margin-block: 26px 42px;
+}
+
+/* סיידבר */
+.page-tips .sidebar{
+    position: sticky;
+    top: 110px;
+    height: max-content;
+    display: flex;
+    flex-direction: column;
+    gap: 18px;
+}
+
+/* כרטיס בסיידבר */
+.page-tips .side-card{
+    background: var(--white);
+    border: 1px solid var(--border);
+    border-radius: var(--radius-lg);
+    padding: 16px;
+    box-shadow: var(--shadow);
+}
+.page-tips .side-card h3{
+    margin: 0 0 .25rem;
+    font-size: 1.15rem;
+}
+
+/* פילטרים */
+.page-tips .filters{
+    display: flex;
+    flex-wrap: wrap;
+    gap: 8px;
+}
+
+/* רשימת פריטים מובילים */
+.page-tips .toplist{
+    list-style: none;
+    padding: 0;
+    margin: .5rem 0 0;
+    display: grid;
+    gap: .35rem;
+}
+.page-tips .toplist a{
+    color: var(--primary);
+    text-decoration: none;
+}
+.page-tips .toplist a:hover{ text-decoration: underline; }
+
+/* גריד טיפים */
+.page-tips .grid{
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(360px, 1fr));
+    gap: 24px;
+    justify-items: stretch;
+}
+
+/* כרטיס טיפ */
+.page-tips .card.tip{
+    display: grid;
+    grid-template-columns: minmax(0, 1fr) 140px;
+    column-gap: 16px;
+    align-items: start;
+    text-align: right;
+    background: var(--white);
+    border: 1px solid var(--border);
+    border-radius: var(--radius-lg);
+    padding: 14px;
+    box-shadow: var(--shadow);
+}
+
+/* מדיה של טיפ */
+.page-tips .tip-media .img-skeleton{
+    height: 120px;
+    border-radius: 12px;
+    background: linear-gradient(135deg, #fff 0%, #f2e5d8 70%);
+    border: 1px solid var(--border);
+}
+.page-tips .tip-media img{
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    border-radius: 12px;
+}
+
+/* תוכן הטיפ */
+.page-tips .tip-body{
+    grid-column: 1;
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    width: 100%;
+    min-width: 0;
+}
+.page-tips .tip-body h3{
+    margin: .15rem 0 .25rem;
+    font-size: 1.1rem;
+}
+.page-tips .tip-body h3 a{
+    color: var(--primary);
+    text-decoration: none;
+}
+.page-tips .tip-body h3 a:hover{ text-decoration: underline; }
+
+/* טקסט רגיל בטיפ */
+.page-tips .tip-body p,
+.page-tips .tip-body h3{
+    display: block;
+    white-space: normal;
+    word-break: normal;
+    overflow: visible;
+    line-height: 1.6;
+}
+
+/* מטא-דאטה בכרטיס טיפ */
+.page-tips .card.tip .tip-body .meta{
+    display: flex;
+    flex-wrap: nowrap;
+    justify-content: flex-start;
+    align-items: center;
+    gap: 10px;
+    width: 100%;
+    margin-top: 12px;
+    overflow: visible;
+}
+.page-tips .card.tip .tip-body .meta > *{
+    display: inline-flex;
+    align-items: center;
+    flex: 0 0 auto;
+    white-space: nowrap;
+    padding: 6px 12px;
+    font-size: clamp(.85rem, 1.1vw, .95rem);
+    line-height: 1.2;
+}
+
+/* מדיה קוורי - דף טיפים */
+@media (max-width: 980px){
+    .page-tips .card.tip{ grid-template-columns: minmax(0, 1fr) 120px; }
+    .page-tips .card.tip .tip-body .meta > *{
+        padding: 5px 10px;
+        font-size: .9rem;
+    }
+}
+@media (max-width: 1100px){
+    .page-tips .feature{ grid-template-columns: 1fr; }
+    .page-tips .feature-media .img-skeleton{ height: 200px; }
+}
+@media (max-width: 920px){
+    .page-tips .layout{ grid-template-columns: 1fr; }
+    .page-tips .sidebar{ position: static; }
+    .page-tips .grid{ grid-template-columns: repeat(2, minmax(0, 1fr)); }
+}
+@media (max-width: 620px){
+    .page-tips .grid{ grid-template-columns: 1fr; }
+    .page-tips .card.tip{ grid-template-columns: 1fr; }
+}
+
+/* ============================================================
+   דף יצירת קשר
+============================================================ */
+.page-contact{
+    background: var(--background);
+    color: var(--primary);
+}
+
+/* אזור הירו משני */
+.page-contact .sub-hero__content{
+    width: min(1000px, 92%);
+    margin: 0 auto;
+    padding: 42px 0 28px;
+    text-align: center;
+}
+.page-contact .sub-hero__content h1{
+    margin: 0 0 8px;
+    font-size: clamp(28px, 5vw, 56px);
+    font-weight: 800;
+    letter-spacing: -.02em;
+}
+.page-contact .sub-hero__content p{
+    margin: 0;
+    color: var(--muted);
+    font-size: clamp(16px, 1.4vw, 19px);
+}
+
+/* מיכל תוכן */
+.page-contact .container{
+    width: min(820px, 92%);
+    margin: 26px auto 56px;
+}
+
+/* טופס יצירת קשר */
+.page-contact .contact-form{
+    background: var(--white);
+    border: 1px solid #e7d8cf;
+    border-radius: var(--radius-lg);
+    box-shadow: var(--shadow-lg);
+    padding: 22px clamp(16px, 3vw, 28px);
+    display: grid;
+    gap: 16px;
+}
+
+/* שורה בטופס */
+.page-contact .contact-form .row{
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+}
+
+/* תווית שדה */
+.page-contact .contact-form label{
+    font-weight: 600;
+    color: var(--primary);
+}
+
+/* תווית חובה - מוסיף כוכבית */
+.page-contact .contact-form label.req::after{
+    content: " *";
+    color: #b85b3b;
+    font-weight: 800;
+}
+
+/* שדות קלט */
+.page-contact .contact-form input[type="text"],
+.page-contact .contact-form input[type="email"],
+.page-contact .contact-form input[type="tel"],
+.page-contact .contact-form textarea{
+    appearance: none;
+    border: 1px solid #e7d8cf;
+    background: #fff;
+    color: var(--primary);
+    border-radius: var(--radius-md);
+    padding: 12px 14px;
+    font-size: 16px;
+    line-height: 1.5;
+    transition: border-color .2s ease, box-shadow .2s ease;
+}
+
+/* תיבת טקסט רב-שורות */
+.page-contact .contact-form textarea{
+    resize: vertical;
+    min-height: 120px;
+}
+
+/* מצב פוקוס - כשמקלידים בשדה */
+.page-contact .contact-form input:focus,
+.page-contact .contact-form textarea:focus{
+    outline: none;
+    border-color: var(--accent);
+    box-shadow: 0 0 0 3px rgba(163, 121, 85, 0.2);
+}
+
+/* מצב שגיאה - שדה לא תקין */
+.page-contact .contact-form input:invalid:focus,
+.page-contact .contact-form textarea:invalid:focus{
+    border-color: #c05a43;
+    box-shadow: 0 0 0 3px rgba(192, 90, 67, .2);
+}
+
+/* קבוצת שדות */
+.page-contact fieldset.group{
+    border: 0;
+    margin: 0;
+    padding: 0;
+}
+.page-contact fieldset.group legend{
+    font-weight: 600;
+    margin-bottom: 8px;
+}
+
+/* קבוצת שדות בשורה - כפתורי בחירה */
+.page-contact fieldset.inline{
+    display: flex;
+    flex-wrap: wrap;
+    gap: 8px;
+}
+
+/* תווית בשורה - מעוצבת ככפתור */
+.page-contact fieldset.inline label{
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    background: #fff;
+    border: 1px solid #e7d8cf;
+    color: var(--primary);
+    border-radius: 9999px;
+    padding: 8px 12px;
+    cursor: pointer;
+    transition: border-color .2s ease, background-color .2s ease, box-shadow .2s ease;
+}
+
+/* מסתיר את כפתור הבחירה האמיתי - שומר על נגישות */
+.page-contact fieldset.inline input{
+    position: absolute;
+    inline-size: 1px;
+    block-size: 1px;
+    clip: rect(0 0 0 0);
+    clip-path: inset(50%);
+    overflow: hidden;
+    white-space: nowrap;
+    border: 0;
+    padding: 0;
+    margin: -1px;
+}
+
+/* תווית כשהכפתור נבחר */
+.page-contact fieldset.inline label:has(input:checked){
+    border-color: var(--accent);
+    background: #F5E9DF;
+    box-shadow: inset 0 0 0 1px var(--accent);
+}
+
+/* כפתור שליחה */
+.page-contact .contact-form .actions{
+    display: flex;
+    justify-content: flex-start;
+    margin-top: 4px;
+}
+.page-contact .contact-form .actions button{
+    border: 1px solid var(--accent);
+    background: var(--accent);
+    color: #fff;
+    border-radius: 12px;
+    padding: 12px 16px;
+    font-size: 16px;
+    cursor: pointer;
+    transition: transform .15s ease, box-shadow .15s ease;
+}
+
+/* אפקט ריחוף */
+.page-contact .contact-form .actions button:hover{
+    transform: translateY(-2px);
+    box-shadow: var(--shadow-lg);
+}
+
+/* אפקט לחיצה */
+.page-contact .contact-form .actions button:active{
+    transform: translateY(0);
+    box-shadow: none;
+}
+
+/* מדיה קוורי - דף יצירת קשר */
+/* מסכים גדולים - פריסה דו-עמודית */
+@media (min-width: 720px){
+    .page-contact .contact-form{
+        grid-template-columns: 1fr 1fr;
+        grid-auto-flow: dense;
+    }
+    /* שדות ראשונים - כל אחד בעמודה נפרדת */
+    .page-contact .contact-form .row:nth-child(1),
+    .page-contact .contact-form .row:nth-child(2),
+    .page-contact .contact-form .row:nth-child(3),
+    .page-contact .contact-form .row:nth-child(4){
+        grid-column: auto;
+    }
+    /* אלמנטים שתופסים 2 עמודות */
+    .page-contact .contact-form fieldset.group{
+        grid-column: 1 / -1;
+    }
+    .page-contact .contact-form .row:has(#message),
+    .page-contact .contact-form .actions{
+        grid-column: 1 / -1;
+    }
+}
+
+/* ============================================================
+   דף אודות 
+============================================================ */
+.page-about{
+    background: var(--background);
+    color: var(--primary);
+}
+
+/* אזור הירו נקי */
+.page-about .hero-clean{
+    padding: 46px 0 18px;
+    background: none;
+}
+
+/* תוכן ההירו */
+.page-about .hero-inner{
+    width: min(1100px, 92%);
+    margin-inline: auto;
+    display: grid;
+    grid-template-columns: 1.2fr 1fr;
+    gap: 24px;
+    align-items: center;
+}
+
+/* טקסט ההירו */
+.page-about .hero-copy h1{
+    margin: 0 0 6px;
+    font-size: clamp(30px, 5vw, 62px);
+    font-weight: 800;
+    letter-spacing: -.02em;
+}
+.page-about .hero-copy h1 span{ color: var(--accent); }
+.page-about .hero-copy p{
+    margin: 0 0 10px;
+    color: var(--muted);
+    font-size: clamp(16px, 1.4vw, 19px);
+}
+
+/* תגיות הירו */
+.page-about .hero-chips{
+    display: flex;
+    gap: 8px;
+    flex-wrap: wrap;
+}
+.page-about .hero-chips .chip{
+    display: inline-block;
+    padding: 8px 12px;
+    border-radius: 9999px;
+    background: #fff;
+    border: 1px solid #e7d8cf;
+    color: var(--accent);
+    font-weight: 600;
+}
+
+/* ויזואל הירו - עיגולים דקורטיביים */
+.page-about .hero-visual{
+    position: relative;
+    height: 220px;
+}
+
+/* עיגולים דקורטיביים */
+.page-about .ring{
+    position: absolute;
+    border-radius: 50%;
+    inset: 0;
+    margin: auto;
+    pointer-events: none;
+    border: 1px dashed #e8d9cf;
+}
+.page-about .ring.big{
+    inline-size: 220px;
+    block-size: 220px;
+    opacity: .7;
+}
+.page-about .ring.mid{
+    inline-size: 170px;
+    block-size: 170px;
+    opacity: .6;
+}
+.page-about .ring.sm{
+    inline-size: 120px;
+    block-size: 120px;
+    opacity: .5;
+}
+
+/* תמונה עגולה במרכז */
+.page-about .circle-photo{
+    position: absolute;
+    inset: 0;
+    margin: auto;
+    inline-size: 124px;
+    block-size: 124px;
+    border-radius: 50%;
+    overflow: hidden;
+    border: 4px solid #fff;
+    box-shadow: var(--shadow-lg);
+    background: #f7f2ee;
+}
+.page-about .circle-photo img{
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    display: block;
+}
+
+/* מיכל תוכן */
+.page-about .about-container{
+    width: min(1100px, 92%);
+    margin: 16px auto 64px;
+}
+
+/* כרטיס תוכן */
+.page-about .about-card{
+    background: var(--white);
+    border: 1px solid #e7d8cf;
+    border-radius: 22px;
+    box-shadow: var(--shadow-lg);
+    padding: 18px clamp(16px, 3vw, 26px);
+    margin-block: 14px;
+}
+
+/* כותרת תוכן */
+.page-about .about-title{
+    margin: 0 0 8px;
+    font-size: clamp(20px, 3vw, 28px);
+    letter-spacing: -.01em;
+}
+
+/* טקסט תוכן */
+.page-about .about-text{
+    margin: 0;
+    color: var(--muted);
+    line-height: 1.75;
+}
+.page-about .about-sub{
+    margin: 0 0 12px;
+    color: var(--muted);
+}
+
+/* רשימה מעוצבת */
+.page-about .about-list{
+    margin: 0;
+    padding: 0;
+    list-style: none;
+    display: grid;
+    gap: 8px;
+    color: var(--primary);
+}
+.page-about .about-list li{
+    position: relative;
+    padding-inline-start: 22px;
+    color: var(--muted);
+}
+
+/* נקודה מעוצבת */
+.page-about .about-list li::before{
+    content: "●";
+    position: absolute;
+    inset-inline-start: 0;
+    top: .35em;
+    font-size: .6rem;
+    color: var(--accent);
+}
+
+/* גריד צוות */
+.page-about .team-grid{
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+    gap: 18px;
+}
+
+/* כרטיס חבר צוות */
+.page-about .team-item{
+    background: #fff;
+    border: 1px solid #e7d8cf;
+    border-radius: var(--radius-lg);
+    text-align: center;
+    padding: 16px;
+    box-shadow: var(--shadow-lg);
+    transition: transform .2s ease, box-shadow .2s ease, border-color .2s ease;
+}
+
+/* אפקט ריחוף */
+.page-about .team-item:hover{
+    transform: translateY(-3px);
+    border-color: var(--accent);
+    box-shadow: 0 14px 28px rgba(90,60,40,.12);
+}
+
+/* תמונת אווטר עם אפקט הילה */
+.page-about .avatar{
+    margin: 0 auto 10px;
+    inline-size: 112px;
+    block-size: 112px;
+    border-radius: 50%;
+    overflow: hidden;
+    background: #f7f2ee;
+    position: relative;
+}
+
+/* הילה צבעונית מאחורי האווטר */
+.page-about .avatar::after{
+    content: "";
+    position: absolute;
+    inset: -6px;
+    border-radius: 50%;
+    background: conic-gradient(from 0deg, #fff 0, #EFD9C7 30%, #F5E9DF 60%, #fff 100%);
+    z-index: -1;
+    filter: blur(0.5px);
+}
+.page-about .avatar img{
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    display: block;
+}
+
+/* שם ותפקיד */
+.page-about .team-item h3{
+    margin: 2px 0 2px;
+    font-size: 1.05rem;
+}
+.page-about .team-item .role{
+    display: inline-block;
+    margin-top: 4px;
+    padding: 4px 10px;
+    border-radius: 9999px;
+    background: #fff;
+    border: 1px solid #e7d8cf;
+    color: var(--accent);
+    font-size: .9rem;
+}
+
+/* קרדיט מפתח */
+.page-about .dev .dev-wrap{
+    display: grid;
+    grid-template-columns: 1fr auto;
+    gap: 16px;
+    align-items: center;
+}
+.page-about .dev p{
+    margin: 0;
+    color: var(--muted);
+}
+
+/* תיבת קישור למפתח */
+.page-about .dev .hit{
+    margin: 0;
+    display: grid;
+    justify-items: center;
+    gap: 6px;
+}
+.page-about .dev .hit img{
+    inline-size: 120px;
+    border-radius: var(--radius-md);
+    border: 1px solid #e7d8cf;
+    background: #fff;
+    display: block;
+}
+.page-about .dev .hit a{
+    color: var(--accent);
+    text-decoration: none;
+    border-bottom: 1px solid rgba(163, 121, 85, 0.4);
+}
+.page-about .dev .hit a:hover{
+    color: #8e5f3f;
+    border-bottom-color: #8e5f3f;
+}
+
+/* מדיה קוורי - דף אודות */
+@media (max-width: 900px){
+    .page-about .hero-inner{ grid-template-columns: 1fr; }
+    .page-about .hero-visual{
+        order: -1;
+        height: 200px;
+        margin-bottom: 6px;
+    }
+}
+
+/* ============================================================
+   דף מפת אתר
+============================================================ */
+.page-sitemap{
+    background: var(--background);
+    color: var(--primary);
+}
+
+/* אזור הירו מפת אתר */
+.page-sitemap .sub-hero.sitemap-hero{
+    background: none;
+    border: none;
+    padding: 56px 0 20px;
+}
+.page-sitemap .sub-hero__content{
+    width: min(1100px, 92%);
+    margin: 0 auto;
+    text-align: center;
+}
+.page-sitemap .sub-hero__content h1{
+    margin: 0 0 6px;
+    font-size: clamp(30px, 5vw, 58px);
+    font-weight: 800;
+    letter-spacing: -.02em;
+}
+.page-sitemap .sub-hero__content p{
+    margin: 0;
+    color: var(--muted);
+    font-size: clamp(16px, 1.4vw, 19px);
+}
+
+/* מיכל מפת אתר */
+.page-sitemap .sitemap-container{
+    width: min(1100px, 92%);
+    margin: 12px auto 64px;
+}
+
+/* גריד מפת אתר */
+.page-sitemap .sitemap-grid{
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+    gap: 16px;
+}
+
+/* כרטיס קטגוריה */
+.page-sitemap .site-card{
+    background: var(--white);
+    border: 1px solid #e7d8cf;
+    border-radius: 18px;
+    box-shadow: var(--shadow-lg);
+    padding: 14px 16px;
+}
+.page-sitemap .site-card.small{ padding: 12px 14px; }
+
+/* כותרת כרטיס */
+.page-sitemap .card-title{
+    margin: 0 0 8px;
+    font-size: 1.15rem;
+    color: var(--primary);
+}
+
+/* רשימת קישורים */
+.page-sitemap .link-list{
+    margin: 0;
+    padding: 0;
+    list-style: none;
+    display: grid;
+    gap: 6px;
+}
+.page-sitemap .link-list a{
+    text-decoration: none;
+    color: var(--primary);
+    border-bottom: 1px dashed transparent;
+    transition: color .15s ease, border-color .15s ease, transform .15s ease;
+}
+
+    /* אפקט ריחוף על קישורים */
+.page-sitemap .link-list a:hover{
+    color: var(--accent);
+    border-bottom-color: rgba(163, 121, 85, 0.35);
+    transform: translateY(-1px);
+}
+
+/* אקורדיון */
+.page-sitemap details{
+    border: 1px solid #e7d8cf;
+    border-radius: var(--radius-md);
+    background: #fff;
+    margin: 10px 0 6px;
+    padding: 6px 8px;
+}
+
+/* כותרת האקורדיון */
+.page-sitemap summary{
+    cursor: pointer;
+    list-style: none;
+    font-weight: 600;
+    color: var(--primary);
+    display: flex;
+    align-items: center;
+    gap: 8px;
+}
+
+/* מסתיר סמן ברירת מחדל בכרום */
+.page-sitemap summary::-webkit-details-marker{ display: none; }
+
+/* אקורדיון פתוח */
+.page-sitemap details[open]{
+    box-shadow: inset 0 0 0 1px var(--accent);
+    background: #F5E9DF;
+}
+.page-sitemap details .link-list{ padding: 6px 2px 2px; }
+
+/* מטא-דאטה */
+.page-sitemap .meta{
+    color: var(--muted);
+    margin: 0;
+}
+
+
